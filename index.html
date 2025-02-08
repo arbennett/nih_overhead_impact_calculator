@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIH Overhead Rate Impact Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>NIH Overhead Rate Impact Calculator</h1>
+        <p class="description">Calculate the financial impact of reducing your institution's NIH grant overhead rate to 15%</p>
+        <p class="description">Find your instituion's current NIH total awarded funding using the <a href=https://reporter.nih.gov/> NIH RePORTER App</a></p>
+        <p class="description">You should be able to find your institutions overhead rates on your Sponsored Projects pages</p>
+        
+        <div class="calculator">
+            <form id="calculatorForm">
+                <div class="input-group">
+                    <label for="totalFunding">Total NIH Funding ($):</label>
+                    <input type="number" id="totalFunding" required min="0" step="1000">
+                </div>
+
+                <div class="input-group">
+                    <label for="currentRate">Current Overhead Rate (%):</label>
+                    <input type="number" id="currentRate" required min="0" max="100" step="0.1">
+                </div>
+
+                <button type="submit">Calculate Impact</button>
+            </form>
+
+            <div id="results" class="hidden">
+                <h2>Financial Impact Analysis</h2>
+                
+                <div class="results-section">
+                    <h3>When current overhead is reallocated to direct costs</h3>
+                    <p class="description">Calculated as: loss = total * ((1 - 1/oldRate) - 1 - 1/newRate) </p>
+                    <p class="description">Or in simplified terms: loss = (total/newRate) - (total/oldRate)</p>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <h4>Current Overhead Amount</h4>
+                            <p id="currentOverhead">$0</p>
+                        </div>
+                        <div class="result-item">
+                            <h4>New Overhead Amount (15%)</h4>
+                            <p id="newOverhead1">$0</p>
+                        </div>
+                        <div class="result-item highlight">
+                            <h4>Total Loss</h4>
+                            <p id="totalLoss">$0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-section">
+                    <h3>When current level of direct costs are maintained</h3>
+                    <p class="description">Calculated as:</p>
+                    <p class="description">directCosts = totalFunding / (1+oldRate)</p>
+                    <p class="description">newTotalFunding = directCosts * (1+newRate)</p>
+                    <p class="description">loss = newTotalFunding - directCosts</p>
+
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <h4>New Total NIH Funding</h4>
+                            <p id="newNihFunding">$0</p>
+                        </div>
+                        <div class="result-item">
+                            <h4>New Overhead Amount (15%)</h4>
+                            <p id="newOverhead2">$0</p>
+                        </div>
+                        <div class="result-item highlight">
+                            <h4>Total Loss</h4>
+                            <p id="netImpact">$0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
